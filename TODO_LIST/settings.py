@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,16 +96,16 @@ WSGI_APPLICATION = "TODO_LIST.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 import os
-DATABASES = {
-     "default": {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': 'django_todo',
-         'USER': 'postgres',
-         'PASSWORD': 'arya@123',
-         'HOST': 'localhost',
-         'PORT': '5432',
-     }
- }
+# DATABASES = {
+#      "default": {
+#          'ENGINE': 'django.db.backends.postgresql',
+#          'NAME': 'django_todo',
+#          'USER': 'postgres',
+#          'PASSWORD': 'arya@123',
+#          'HOST': 'localhost',
+#          'PORT': '5432',
+#      }
+#  }
 
 
 
@@ -123,7 +124,10 @@ DATABASES = {
 
 
 
+DATABASES = {
+    'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
 
+    }
 
 
 
@@ -162,6 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
